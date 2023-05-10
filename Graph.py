@@ -69,6 +69,7 @@ class Apex:
         print(f'old_apex into after init {self.old_apex}')
 
 
+
 for apex in GRAPH:
     Node(apex[0], apex[1])
 
