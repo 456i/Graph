@@ -1,7 +1,9 @@
-GRAPH = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7], [4, 8], [4, 9], [5, 10], [5, 11], [6, 12],
-         [6, 13], [7, 14], [7, 15], [8, 16], [8, 17], [9, 18], [9, 19], [9, 20], [10, 21], [11, 22], [11, 23], [12, 24], [12, 25], [13, 26], [13, 27], [13, 28]]
-COUNT_OF_APEX_new_tree = 5
-APEXES_WITH_WEIGHTS = {apex: None for apex in range(1, 29)}
+GRAPH = [[1, 2], [1, 3], [1, 4], [1, 5], [2, 6], [3, 7], [3, 8], [3, 9], [3, 10], [4, 11], [4, 12], [5, 13], [5, 14], [5, 15],
+         [6, 17], [8, 18], [10, 19], [10, 20], [12, 21], [12, 22], [13, 23], [15, 24], [15, 25], [18, 26], [18, 27], [19, 28],
+         [20, 29], [20, 30], [22, 31], [22, 31], [23, 33], [25, 34], [25, 35], ]
+COUNT_OF_APEX_new_tree = 15
+COUNT_NODES = len(GRAPH)-1
+APEXES_WITH_WEIGHTS = {apex: None for apex in range(1, COUNT_NODES)}
 print(APEXES_WITH_WEIGHTS, 'this is apex with weights')
 STACK = {}
 
@@ -36,54 +38,33 @@ def make_node():
 class Apex:
     def __init__(self, dictionary):
         self.dict = dictionary
-        # self.trial_dict = self.dict.copy()
         self.nodes = None
         self.lowest_apex = None
         self.enter_node = None
         self.count_of_apexes = 0
         self.old_node = None
 
-    def get_lowest_apex(self, enter_node=None, count_of_apexes=0, old_node=None):
+    def get_lowest_apex(self, enter_node=None, old_node=None):
         self.nodes = enter_node
-        self.count_of_apexes = count_of_apexes
         self.old_node = old_node
         if enter_node is None:
             self.nodes = list(self.dict.keys())
         for self.apex in self.nodes:
             try:
                 self.lowest_apex = self.dict[self.apex]
-                # del self.trial_dict[self.apex]
-                print(self.lowest_apex)
+                self.get_lowest_apex(self.lowest_apex, self.old_node)
 
-                # sefl.count_of_apexes_for_tree_apex += 1
-                APEXES_WITH_WEIGHTS[self.apex] = self.count_of_apexes
-                self.count_of_apexes += 1
-                self.get_lowest_apex(self.lowest_apex, self.count_of_apexes, self.old_node)
-                # self.count_of_apexes_for_tree_apex = 0
             except Exception as ex:
-                # print('Exception -> ',ex)
-                # APEXES_WITH_WEIGHTS[self.lowest_apex[0]] = self.count_of_apexes
-                print(self.count_of_apexes)
+                print('Exception -> ', ex)
 
-        self.count_of_apexes = 0
+            print(self.lowest_apex)
 
 
 for apex in GRAPH:
     Node(apex[0], apex[1])
 
-
-
-
-
-
-
-
+print(STACK)
+apex = Apex(STACK)
+apex.get_lowest_apex()
 
 print(STACK)
-make_node()
-# apex = Apex(STACK)
-# apex.get_lowest_apex()
-
-print(STACK)
-
-
