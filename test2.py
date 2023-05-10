@@ -38,26 +38,35 @@ def make_node():
 class Apex:
     def __init__(self, dictionary):
         self.dict = dictionary
+        self.list_of_nodes = list(self.dict.keys())
         self.nodes = None
         self.lowest_apex = None
         self.enter_node = None
         self.count_of_apexes = 0
         self.old_node = None
+        self.old_apex = 0
 
-    def get_lowest_apex(self, enter_node=None, old_node=None):
+    def get_lowest_apex(self, enter_node=None, old_node=None, count_of_apexes=0):
         self.nodes = enter_node
         self.old_node = old_node
+        self.count_of_apexes = count_of_apexes
         if enter_node is None:
             self.nodes = list(self.dict.keys())
         for self.apex in self.nodes:
-            try:
+            if self.apex in self.list_of_nodes:
+                if self.old_apex < self.apex:
+                    self.old_apex = self.apex
+
+                print(f'1line old_apex into if {self.old_apex}\napex -> {self.apex}\n count of apexes {self.count_of_apexes}')
                 self.lowest_apex = self.dict[self.apex]
-                self.get_lowest_apex(self.lowest_apex, self.old_node)
+                self.count_of_apexes += 1
+                print(f'2line old_apex into if {self.old_apex}\napex -> {self.apex}\n count of apexes {self.count_of_apexes}')
+                self.get_lowest_apex(self.lowest_apex, self.old_node, self.count_of_apexes)
 
-            except Exception as ex:
-                print('Exception -> ', ex)
-
-            print(self.lowest_apex)
+        APEXES_WITH_WEIGHTS[self.old_apex] = self.count_of_apexes
+        self.old_apex = 0
+        self.count_of_apexes = 0
+        print(f'old_apex into after init {self.old_apex}')
 
 
 for apex in GRAPH:
@@ -68,3 +77,4 @@ apex = Apex(STACK)
 apex.get_lowest_apex()
 
 print(STACK)
+print(APEXES_WITH_WEIGHTS)
