@@ -57,6 +57,7 @@ class Apex:
                 if self.old_apex < self.apex:
                     self.old_apex = self.apex
 
+
                 print(f'1line old_apex into if {self.old_apex}\napex -> {self.apex}\n count of apexes {self.count_of_apexes}')
                 self.lowest_apex = self.dict[self.apex]
                 self.count_of_apexes += 1
