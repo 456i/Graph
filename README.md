@@ -2,7 +2,7 @@
 # Graph
 Graph - it is a visual representation of data or information, showing connections between nodes or vertices. Used in math, computer science, and data analysis to model complex systems and relationships.
 
-The ░▒▓GRAPH CONSTRUCTION▒▓░ file implements a graph creation mechanism using animations. This tool allows you to visualise the graphical structure and relationships between graph elements.
+The ░▒▓GRAPH CONSTRUCTION▓▒░ file implements a graph creation mechanism using animations. This tool allows you to visualise the graphical structure and relationships between graph elements.
 
 When you start the program, the graph is gradually constructed using animations, allowing you to visualise the connections between the nodes. This helps to visually understand the structure of the graph and its components.
 
@@ -14,7 +14,7 @@ This approach strikes a balance between visual appeal and functionality, allowin
 # Граф
 Граф - это визуальное представление данных или информации, показывающее связи между узлами или вершинами. Используется в математике, информатике и анализе данных для моделирования сложных систем и отношений.
 
-В файле "GRAPH CONSTRUCTION" реализован механизм создания графов с использованием анимаций. Этот инструмент позволяет визуализировать графическую структуру и взаимосвязи элементов графа.
+В файле ░▒▓GRAPH CONSTRUCTION▓▒░ реализован механизм создания графов с использованием анимаций. Этот инструмент позволяет визуализировать графическую структуру и взаимосвязи элементов графа.
 
 При запуске программы, граф постепенно строится с помощью анимации, позволяя наглядно представить связи между узлами. Это помогает визуально понять структуру графа и его компоненты.
 
