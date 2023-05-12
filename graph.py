@@ -6,6 +6,7 @@ COUNT_NODES = len(GRAPH)-1
 APEXES_WITH_WEIGHTS = {apex: None for apex in range(1, COUNT_NODES)}
 print(APEXES_WITH_WEIGHTS, 'this is apex with weights')
 STACK = {}
+from graph_construction import GraphAnimator
 
 
 class Node:
