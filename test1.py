@@ -13,7 +13,7 @@ class Apex:
         self.pos = None
         self.fig = None
         self.ax = None
-        self.visited_apexes = []
+        self.visited_apexes = [1, 1]
         self.create_graph()
 
     def create_graph(self):
@@ -22,7 +22,7 @@ class Apex:
         self.G.add_edges_from(self.graph)
 
     def change_color(self, node, color):
-        node_colors = {n: 'blue' for n in self.G.nodes}
+        node_colors = {n: 'lightblue' for n in self.G.nodes}
         node_colors[node] = color
         return node_colors
 
@@ -30,15 +30,13 @@ class Apex:
         self.nodes = enter_node
         self.old_node = old_node
         self.count_of_apexes = count_of_apexes
-        if enter_node is None:
-            self.nodes = list(self.dict.keys())
+        self.nodes = list(self.dict.keys()) if enter_node is None else self.nodes
         for self.apex in self.nodes:
+            self.visited_apexes.append(self.apex)
             if self.apex in self.list_of_nodes:
                 self.old_node = self.apex
                 if self.old_node < self.apex:
                     self.old_node = self.apex
-                print(self.apex)
-                self.visited_apexes.append(self.apex)
                 self.lowest_apex = self.dict[self.apex]
                 self.count_of_apexes += 1
                 self.get_lowest_apex(self.lowest_apex, self.old_node, self.count_of_apexes)
@@ -46,8 +44,8 @@ class Apex:
 
     def draw_graph(self, node, ax):
         ax.clear()
-        node_colors = self.change_color(node, 'red')
-        nx.draw(self.G, self.pos, with_labels=True, node_color=list(node_colors.values()), ax=ax)
+        node_colors = self.change_color(node, 'pink')
+        nx.draw_kamada_kawai(self.G, node_color=list(node_colors.values()), with_labels=True)
 
 
 class GraphAnimator:
@@ -73,7 +71,7 @@ class GraphAnimator:
 
             self.apex.draw_graph(self.node_to_update[self.i], self.ax)
 
-        self.animation = FuncAnimation(self.fig, update_frame, frames=None, interval=1000, repeat=False)
+        self.animation = FuncAnimation(self.fig, update_frame, cache_frame_data=False, interval=1000, repeat=False)
 
         def on_key_press(event):
             if event.key == ' ':
@@ -87,17 +85,16 @@ class GraphAnimator:
         self.fig.canvas.mpl_connect('key_press_event', on_key_press)
         plt.show()
 
+
 # Пример использования
 STACK = {
     1: [2, 3, 4, 5], 2: [6], 3: [7, 8, 9, 10], 4: [11, 12], 5: [13, 14, 15], 6: [17], 8: [18], 10: [19, 20], 12: [21, 22], 13: [23], 15: [24, 25],
-18: [26, 27], 19: [28], 20: [29, 30], 22: [31, 31], 23: [33], 25: [34, 35]
+    18: [26, 27], 19: [28], 20: [29, 30], 22: [31, 31], 23: [33], 25: [34, 35]
 }
 
-graph = [
-[1, 2], [1, 3], [1, 4], [1, 5], [2, 6], [3, 7], [3, 8], [3, 9], [3, 10], [4, 11], [4, 12], [5, 13], [5, 14], [5, 15],
-[6, 17], [8, 18], [10, 19], [10, 20], [12, 21], [12, 22], [13, 23], [15, 24], [15, 25], [18, 26], [18, 27], [19, 28],
-[20, 29], [20, 30], [22, 31], [22, 31], [23, 33], [25, 34], [25, 35]
-]
+graph = [[1, 2], [1, 3], [1, 4], [1, 5], [2, 6], [3, 7], [3, 8], [3, 9], [3, 10], [4, 11], [4, 12], [5, 13], [5, 14], [5, 15],
+         [6, 17], [8, 18], [10, 19], [10, 20], [12, 21], [12, 22], [13, 23], [15, 24], [15, 25], [18, 26], [18, 27], [19, 28],
+         [20, 29], [20, 30], [22, 31], [22, 31], [23, 33], [25, 34], [25, 35]]
 
 animator = GraphAnimator(graph)
 animator.start_animation()
