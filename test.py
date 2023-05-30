@@ -6,9 +6,11 @@ balance = 0
 for k in range(len(list_of_trees)//num__of_tree):
     if k > 1:
         balance = k - 1
-    cases += len(list_of_trees) - num__of_tree * k - balance
+    if k == 0:
+        k = 1
+    cases += len(list_of_trees) - num__of_tree * k - balance + 1
 
-print(cases)
+    print(cases)
 
 for i in range(cases):
     print('_ _ _ _ _ _ _ _ _ _')
