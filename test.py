@@ -13,4 +13,4 @@ for k in range(len(list_of_trees)//num__of_tree):
     print(cases)
 
 for i in range(cases):
-    print('_ _ _ _ _ _ _ _ _ _')
+    print(i+1, ' _ _ _ _ _ _ _ _ _ _')
