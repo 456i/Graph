@@ -33,6 +33,5 @@ def generate_beautiful_numbers(num_1, num_2, delta=1):
             out = True
 
 
-    print(result)
-
+print(result)
 generate_beautiful_numbers(number_1, number_2, 1)
